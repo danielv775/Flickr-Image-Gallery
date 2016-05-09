@@ -16,9 +16,6 @@
  flickr key
  81d78a591edd8080ddd6e0cee6c12ffe
  
- flickr secret
- 0ec6dddbd5868e8f
- 
  */
 
 @interface ImageLibrary : NSObject
