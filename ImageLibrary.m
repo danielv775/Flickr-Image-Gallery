@@ -63,6 +63,35 @@ NSString *const FlickrAPIKey = @"81d78a591edd8080ddd6e0cee6c12ffe";
     //Initialize & Begin asynchronous download
     NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
     
+    /*
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        [[session dataTaskWithRequest:request
+                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                        [self receiveJSONData:data];
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            //reload collectionview after downloading images
+                            [collectionView reloadData];
+                            //NSLog(@"Reloaded collectionview...");
+                        });
+                        
+                    }]resume];
+    });
+     */
+    
+    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request
+                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+                                    [self receiveJSONData:data];
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        //reload collectionview after downloading images
+                                        [collectionView reloadData];
+                                        //NSLog(@"Reloaded collectionview...");
+                                    });
+                                  }];
+    [task resume];
+    
+    /*
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [[session dataTaskWithRequest:request
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -73,8 +102,10 @@ NSString *const FlickrAPIKey = @"81d78a591edd8080ddd6e0cee6c12ffe";
                         [collectionView reloadData];
                         //NSLog(@"Reloaded collectionview...");
                     });
+                    
                 }]resume];
-
+     */
+     
     //Change to NSURL Session
     //NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
     

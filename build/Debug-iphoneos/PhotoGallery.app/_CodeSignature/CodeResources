@@ -14,7 +14,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		wQ14o+CfS3UWLLDqgDRqmynaIec=
+		u0RTmb1duQtHWWz9v4ra3eA0jz8=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/Info.plist</key>
 		<dict>
@@ -29,7 +29,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			EIM0xu3YQW3keODglUmYrFrN1L4=
+			BTQbWHLF+/y1cm1moWPRs6nX8Cc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -47,7 +47,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1x7YWAv7AkVwJPabQYFNkCEANuI=
+			P5EUd9O1OfRR/p38d0kXklWIq64=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -56,7 +56,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			o7E5a2ohThXOjpsK35FnnlxxZow=
+			fSFt9opWyIVM3AFxCoyXd7HNaXM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -65,14 +65,18 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Pfkb4T/ITI8jCo0UP3l5/9a5N/w=
+			/ve7EDq5fQTP/ikMH3anq3BiL9k=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>Info.plist</key>
 		<data>
-		Wx4jKeP+oDQRvvMYnf0hPOCWF8k=
+		Pac8ImhCEIOCcYglIxHjcVXtpac=
+		</data>
+		<key>LaunchImage-800-667h@2x.png</key>
+		<data>
+		czh/cg7GcLqTzTKrCny3BQyugAI=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -95,7 +99,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		wQ14o+CfS3UWLLDqgDRqmynaIec=
+		u0RTmb1duQtHWWz9v4ra3eA0jz8=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/Info.plist</key>
 		<dict>
@@ -110,7 +114,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			EIM0xu3YQW3keODglUmYrFrN1L4=
+			BTQbWHLF+/y1cm1moWPRs6nX8Cc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -128,7 +132,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1x7YWAv7AkVwJPabQYFNkCEANuI=
+			P5EUd9O1OfRR/p38d0kXklWIq64=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -137,7 +141,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			o7E5a2ohThXOjpsK35FnnlxxZow=
+			fSFt9opWyIVM3AFxCoyXd7HNaXM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -146,11 +150,15 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Pfkb4T/ITI8jCo0UP3l5/9a5N/w=
+			/ve7EDq5fQTP/ikMH3anq3BiL9k=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>LaunchImage-800-667h@2x.png</key>
+		<data>
+		czh/cg7GcLqTzTKrCny3BQyugAI=
+		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
 		kgi6nEG4h5AABqT1hbIZvuzbIMM=

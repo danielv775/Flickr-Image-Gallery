@@ -16,8 +16,8 @@
     if (self)
     {
         //not spacing to 0...
-        self.minimumLineSpacing = 0;
-        self.minimumInteritemSpacing = 0;
+        self.minimumLineSpacing = 1.0;
+        self.minimumInteritemSpacing = 1.0;
         self.scrollDirection = UICollectionViewScrollDirectionVertical;
     }
     return self;
@@ -26,6 +26,7 @@
 - (CGSize)itemSize
 {
     NSInteger numberOfColumns = 3;
+    //collectionview width / number of columns
     CGFloat itemWidth = (CGRectGetWidth(self.collectionView.frame) - (numberOfColumns - 1)) / numberOfColumns;
     return CGSizeMake(itemWidth, itemWidth);
 }

@@ -10,6 +10,9 @@
 
 @interface ViewPhotoCell : UICollectionViewCell
 
+/* By creating a custom UICollectionview cell, a cached version of the cell
+is used and saves some memory; the cell does not need to be created from scratch
+ */
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 
 @end

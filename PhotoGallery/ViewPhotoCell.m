@@ -14,6 +14,7 @@
 {
     [super prepareForReuse];
     self.imageView.image = nil;
+    //self.imageView.contentMode = UIViewContentModeScaleAspectFill;
 }
 
 @end

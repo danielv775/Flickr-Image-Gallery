@@ -32,12 +32,27 @@
 }
  */
 
+/*
+-(void)asynchImageDownload
+{
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        weakSelf.flickrAPI = [[ImageLibrary alloc]init];
+        [weakSelf.flickrAPI initImageArrays];
+        [weakSelf.flickrAPI loadFlickrPhotosAndSearch:@"beach" AndReload:self.collectionView];
+    });
+}
+ */
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    
+    //Lagging right now when scrolling because im blocking the main thread,
+    //Have to send asynch request to download images on a different thread
     self.flickrAPI = [[ImageLibrary alloc]init];
     [self.flickrAPI initImageArrays];
-    [self.flickrAPI loadFlickrPhotosAndSearch:@"beach" AndReload:self.collectionView];
+    [self.flickrAPI loadFlickrPhotosAndSearch:@"race" AndReload:self.collectionView];
+     
     
     [self changeNavBarAttributes];
 }
