@@ -25,16 +25,16 @@
     NSURL *imageURL;
     NSString *imageURLString;
     UIImage *realImage;
+    
+    NSArray *photosFromWeb;
 }
 
 -(void)refreshUIOnMainThread
 {
-    NSLog(@"Entering refreshUIOnMainThread...\n");
+    photosFromWeb = [libraryAPI getPhotos];
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"Entering dispatch_get_main_queue...\n");
-        if ([self.delegate respondsToSelector:@selector(reloadUIAfterImageDownload)]) {
-            NSLog(@"Entering Responds to @selector(reloadUIAfterImageDownload)...\n");
-            [self.delegate reloadUIAfterImageDownload];
+        if([self.delegate respondsToSelector:@selector(reloadUIAfterImageDownload:)]) {
+            [self.delegate reloadUIAfterImageDownload:photosFromWeb];
         }
     });
 }
@@ -118,6 +118,7 @@
         
         webserverPhoto = [[Photo alloc]initWithTitle:title AndImageURL:imageURL AndUIImage:nil];
         
+        libraryAPI = [LibraryAPI sharedInstance];
         [libraryAPI addPhoto:webserverPhoto];
     }
     
@@ -159,6 +160,7 @@
         webserverPhoto = [[Photo alloc]initWithTitle:title AndImageURL:imageURL AndUIImage:nil];
         
         /*Populate Photo model array*/
+        libraryAPI = [LibraryAPI sharedInstance];
         [libraryAPI addPhoto:webserverPhoto];
     }
     

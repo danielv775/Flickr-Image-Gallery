@@ -22,6 +22,10 @@
     [self initUI];
     self.imageView.image = self.theImage;
     
+    //NSLog(@"image Title text: %@\n", self.theImageTitle);
+    
+    self.imageTitleLabel.text = self.theImageTitle;
+    
     // Do any additional setup after loading the view.
 }
 

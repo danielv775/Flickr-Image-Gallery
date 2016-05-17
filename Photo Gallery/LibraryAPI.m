@@ -8,6 +8,7 @@
 
 #import "LibraryAPI.h"
 #import "PersistImages.h"
+#import "ViewController.h"
 
 
 /*Central API that gives access to Photo Model
@@ -27,6 +28,7 @@ NSString *const ImgurAPISecretKey = @"7f21e67831cf9b3d062f81064e5a70bda86663dd";
 {
     PersistImages *persistImages;
     FlickrClient *flickrClient;
+    ViewController *vc;
     NSString *requestStringFlickr;
     
     NSString *requestStringImgur;
@@ -57,6 +59,8 @@ NSString *const ImgurAPISecretKey = @"7f21e67831cf9b3d062f81064e5a70bda86663dd";
         
         /*Web server images from Flickr and Imgur*/
         flickrClient = [[FlickrClient alloc]init];
+        vc = [[ViewController alloc]init];
+        flickrClient.delegate = vc;
         
         /*Data fetched from either Flickr or Imgur, and after the 1st one finishes, the 2nd one
          fetches the its image data*/

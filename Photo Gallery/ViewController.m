@@ -23,8 +23,8 @@
     [super viewDidLoad];
     
     /*Directly connect View Controller to FlickrClient*/
-    FlickrClient *flickrDelegate = [[FlickrClient alloc]init];
-    flickrDelegate.delegate = self;
+    //FlickrClient *flickrDelegate = [[FlickrClient alloc]init];
+    //flickrDelegate.delegate = self;
     
     /*Retrieve Photo Model array*/
     LibraryAPI *libraryAPI = [LibraryAPI sharedInstance];
@@ -52,11 +52,7 @@
     /*Pull photo from Photo model Array, imageURL property should be populated after URLs are fetched
      from Flickr and Imgur*/
     displayPhoto = [allPhotos objectAtIndex:indexPath.item];
-    [self.cell.imageView sd_setImageWithURL:displayPhoto.imageURL placeholderImage:[UIImage imageNamed:@"image2"]];
-    
-    /*extract imageURL from Photo Model and use asych. image downloading library to get UIImage*/
-    
-    //self.cell.imageView.image = displayPhoto.image;
+    [self.cell.imageView sd_setImageWithURL:displayPhoto.imageURL placeholderImage:displayPhoto.image];
     
     return self.cell;
 }
@@ -65,17 +61,21 @@
 {
     /*Initially, 3 photos from assets.xcassets*/
     /*After Photo Model populated with data from Flickr and Imgur, should increase*/
+    /*After reloadData called, this should be called again with the new count*/
     
     NSLog(@"Number of Photos in Photo Model: %lu", (unsigned long)[allPhotos count]);
-    return [allPhotos count];
+    return ([allPhotos count]);
 }
 
 #pragma mark FlickrClient Delegate Method
--(void)reloadUIAfterImageDownload
+-(void)reloadUIAfterImageDownload:(NSArray*)photosFromWeb
 {
     NSLog(@"Delegate Reload Called.....\n");
+    allPhotos = photosFromWeb;
+    NSLog(@"Number of Photos in Photo Model AllPhotos: %lu", (unsigned long)[allPhotos count]);
     [self.collectionView reloadData];
 }
+ 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

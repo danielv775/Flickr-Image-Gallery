@@ -88,26 +88,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="image Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FdQ-0O-YSC">
-                                <rect key="frame" x="0.0" y="496" width="600" height="104"/>
-                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yf9-gp-kME">
                                 <rect key="frame" x="0.0" y="64" width="600" height="432"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Image Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOD-gd-c8k">
+                                <rect key="frame" x="0.0" y="495" width="600" height="105"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yf9-gp-kME" firstAttribute="leading" secondItem="Q7Q-9a-Tkd" secondAttribute="leadingMargin" constant="-20" id="3Ll-ei-wLg"/>
-                            <constraint firstItem="FdQ-0O-YSC" firstAttribute="leading" secondItem="Q7Q-9a-Tkd" secondAttribute="leadingMargin" constant="-20" id="Ayu-rz-VOl"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="yf9-gp-kME" secondAttribute="trailing" constant="-20" id="ICv-CH-n1V"/>
-                            <constraint firstItem="FdQ-0O-YSC" firstAttribute="top" secondItem="yf9-gp-kME" secondAttribute="bottom" id="Kx4-JI-PBI"/>
-                            <constraint firstItem="ljs-Ri-5AO" firstAttribute="top" secondItem="FdQ-0O-YSC" secondAttribute="bottom" id="MXj-vj-odI"/>
-                            <constraint firstItem="yf9-gp-kME" firstAttribute="top" secondItem="2Fo-MT-qcO" secondAttribute="bottom" id="hk2-uN-fK8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="FdQ-0O-YSC" secondAttribute="trailing" constant="-20" id="xsN-MV-q5R"/>
-                            <constraint firstItem="FdQ-0O-YSC" firstAttribute="top" secondItem="yf9-gp-kME" secondAttribute="bottom" id="yxO-SQ-Reb"/>
+                            <constraint firstItem="NOD-gd-c8k" firstAttribute="leading" secondItem="Q7Q-9a-Tkd" secondAttribute="leadingMargin" constant="-20" id="3rR-J3-6oL"/>
+                            <constraint firstItem="NOD-gd-c8k" firstAttribute="top" secondItem="2Fo-MT-qcO" secondAttribute="bottom" constant="30" id="5DV-IM-TmX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NOD-gd-c8k" secondAttribute="trailing" constant="-20" id="MQg-sJ-LNT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yf9-gp-kME" secondAttribute="trailing" constant="-20" id="SGL-BZ-veP"/>
+                            <constraint firstItem="yf9-gp-kME" firstAttribute="top" secondItem="2Fo-MT-qcO" secondAttribute="bottom" id="cGw-Xn-Y6e"/>
+                            <constraint firstItem="ljs-Ri-5AO" firstAttribute="top" secondItem="yf9-gp-kME" secondAttribute="bottom" id="cwJ-mN-Smp"/>
+                            <constraint firstItem="yf9-gp-kME" firstAttribute="leading" secondItem="Q7Q-9a-Tkd" secondAttribute="leadingMargin" constant="-20" id="uR1-Gn-FF6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photo" id="ps0-tb-4tz">
@@ -118,7 +117,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="imageTitleLabel" destination="FdQ-0O-YSC" id="rye-oX-zMp"/>
+                        <outlet property="imageTitleLabel" destination="NOD-gd-c8k" id="Eis-qU-MmI"/>
                         <outlet property="imageView" destination="yf9-gp-kME" id="hPT-ex-l6O"/>
                     </connections>
                 </viewController>
