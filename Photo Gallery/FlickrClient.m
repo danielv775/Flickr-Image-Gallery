@@ -18,10 +18,11 @@
     /*Stored in Photo Model*/
     NSString *title;
     NSURL *imageURL;
+    NSString *imageURLString;
     UIImage *realImage;
 }
 
-- (id)getRequest:(NSString*)urlString
+- (id)getRequestFlickr:(NSString*)urlString
 {
     NSURL *url = [NSURL URLWithString:urlString];
     
@@ -30,26 +31,14 @@
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         /*Parse JSON result*/
-        [self receiveJSONData:data];
-        if([self.delegate respondsToSelector:@selector(reloadUIAfterImageDownload)]) {
-            NSLog(@"Responded to Selector");
-            [self.delegate reloadUIAfterImageDownload];
-        }
-        
-        /*Use delegate to tell View Controller to call a reloadUI function after image download*/
-        
+        [self receiveJSONDataFromFlickr:data];
+        /*Use delegate to tell View Controller to call a reloadUI function after image download on main thread*/
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Hello...");
             if([self.delegate respondsToSelector:@selector(reloadUIAfterImageDownload)]) {
                 NSLog(@"Calling delegate after download soon...\n");
                 [self.delegate reloadUIAfterImageDownload];
             }
         });
-        
-        NSLog(@"Finished...");
-        
-        /*After url data is fetched from server, the UI must be reloaded on the main thread*/
-        
     }];
     [task resume];
     
@@ -57,10 +46,27 @@
     
 }
 
-- (UIImage*)downloadImage:(NSURL*)url
+-(id)getRequestImgur:(NSString*)urlString ImgurAPIKey:(NSString *)APIKey
 {
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    return [UIImage imageWithData:data];
+    NSLog(@"Constructing Request...\n");
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    //NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //[request setValue:@"Authorization" forKey:APIKey];
+    [request setValue:APIKey forHTTPHeaderField:@"Authorization"];
+    
+    NSURLSessionDataTask *task = [[NSURLSession sharedSession]dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        /*Parse returned JSON to extract image data and add to photo model*/
+        [self receiveJSONDataFromImgur:data];
+        
+    }];
+    [task resume];
+    
+    return nil;
 }
 
 /*Check JSON Request Result
@@ -77,10 +83,33 @@
     }];
 }
 
-
+-(void)receiveJSONDataFromImgur:(NSData*)data
+{
+    NSDictionary *jsonResult = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    //[self checkJSONRequest:jsonResult];
+    
+    /*want title and link data from json result*/
+    NSArray *photos = [jsonResult objectForKey:@"data"];
+    
+    for(NSDictionary *photo in photos) {
+        title = [photo objectForKey:@"title"];
+        
+        imageURLString = [photo objectForKey:@"link"];
+        imageURL = [NSURL URLWithString:imageURLString];
+        
+        webserverPhoto = [[Photo alloc]initWithTitle:title AndImageURL:imageURL AndUIImage:nil];
+        
+        [libraryAPI addPhoto:webserverPhoto];
+        
+    }
+    
+    NSLog(@"Imgur Server Photos added to model\n");
+    
+}
 
 //Storing title -NSString and imageURL -NSURL
--(void)receiveJSONData:(NSData*)data
+-(void)receiveJSONDataFromFlickr:(NSData*)data
 {
     //json is stored in dictionary format
     NSDictionary *jsonResult = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -107,33 +136,14 @@
         /*GET imageURL for photo model*/
         imageURL = [NSURL URLWithString:photoURLString];
         
-        /*Download UIImage for photo model asynch*/
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            realImage = [self downloadImage:imageURL];
-        });
-         
-        //realImage = [self downloadImage:imageURL];
-        
         //Store title property and imageURL in photo model
-        webserverPhoto = [[Photo alloc]initWithTitle:title AndImageURL:imageURL AndUIImage:realImage];
+        webserverPhoto = [[Photo alloc]initWithTitle:title AndImageURL:imageURL AndUIImage:nil];
         
         /*Populate Photo model array*/
         [libraryAPI addPhoto:webserverPhoto];
     }
     
-    NSLog(@"Web Server Photos added to Model");
-    
-    /*
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"Hello...");
-        id<FlickrClientDelegate> strongDelegate = self.delegate;
-        if([strongDelegate respondsToSelector:@selector(reloadUIAfterImageDownload)]) {
-            NSLog(@"Calling delegate after download soon...\n");
-            [strongDelegate reloadUIAfterImageDownload];
-        }
-    });
-    NSLog(@"Finished...");
-     */
+    NSLog(@"Flickr Server Photos added to Model");
 }
 
 @end

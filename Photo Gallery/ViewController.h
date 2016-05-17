@@ -13,7 +13,7 @@
 #import "FlickrClient.h"
 #import "LibraryAPI.h"
 
-@interface ViewController : UIViewController<UICollectionViewDataSource, FlickrClientDelegate, LibraryAPIDelegate>
+@interface ViewController : UIViewController<UICollectionViewDataSource, FlickrClientDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property(strong, nonatomic) PhotoCell *cell;

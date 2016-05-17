@@ -6,6 +6,11 @@
 //  Copyright © 2016 Dan Vasilyonok. All rights reserved.
 //
 
+/*
+ Although called FlickrClient, this API interfaces with both the Flickr API
+ and Imgur API using GET requests to fetch images and populate the Photo Model
+ */
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -22,10 +27,10 @@
 //Used to communicate with VC, which should reload UI after images fetched from server
 @property (weak, nonatomic) id <FlickrClientDelegate> delegate;
 
-//GET used to retrieve remote data
-- (id)getRequest:(NSString*)urlString;
+//GET used to retrieve data from flickr
+-(id)getRequestFlickr:(NSString*)urlString;
 
-//Retrieve downloaded photo from webserver
--(UIImage*)downloadImage:(NSURL*)url;
+//GET to retrieve data from imgur
+-(id)getRequestImgur:(NSString*)urlString ImgurAPIKey:(NSString *)APIKey;
 
 @end

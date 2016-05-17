@@ -23,7 +23,6 @@
     
     /*Retrieve Photo Model array*/
     LibraryAPI *libraryAPI = [LibraryAPI sharedInstance];
-    libraryAPI.delegate = self;
     allPhotos = [libraryAPI getPhotos];
     
     self.collectionView.collectionViewLayout = [[CustomFlowLayout alloc] init];
@@ -71,13 +70,6 @@
 {
     NSLog(@"Number of Photos in Photo Model: %lu", (unsigned long)[allPhotos count]);
     return [allPhotos count];
-}
-
--(void)passFlickerInstance:(FlickrClient *)flickr
-{
-    /*Use flickr to set delegate to self*/
-    NSLog(@"Setting delegate to VC - Self...");
-    flickr.delegate = self;
 }
 
 -(void)reloadUIAfterImageDownload

@@ -12,21 +12,15 @@
 
 /*Using this LibraryAPI demonstrates the Facade Design Pattern*/
 
-@protocol LibraryAPIDelegate <NSObject>
-
--(void)passFlickerInstance:(FlickrClient*)flickr;
-
-@end
-
 @interface LibraryAPI : NSObject
 
 +(LibraryAPI *)sharedInstance;
 
-@property (weak, nonatomic) id <LibraryAPIDelegate> delegate;
-
 -(NSArray*)getPhotos;
 -(void)addPhoto:(Photo *)photo;
 -(void)deletePhotoAtIndex:(int)index;
--(void)fetchPhotosFromServer:(NSString*)APIKey withKeyWord:(NSString*)keyWord;
+-(void)fetchPhotosFromFlickrServer:(NSString*)APIKey withKeyWord:(NSString*)keyWord;
+-(void)fetchPhotosFromImgurServer:(NSString*)APIKey;
+
 
 @end
