@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "Photo.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ViewController ()
 {
@@ -20,6 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    /*Directly connect View Controller to FlickrClient*/
+    FlickrClient *flickrDelegate = [[FlickrClient alloc]init];
+    flickrDelegate.delegate = self;
     
     /*Retrieve Photo Model array*/
     LibraryAPI *libraryAPI = [LibraryAPI sharedInstance];
@@ -44,16 +49,15 @@
     self.cell.layer.shouldRasterize = YES;
     self.cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
-    /*Pull photo from Photo model Array*/
+    /*Pull photo from Photo model Array, imageURL property should be populated after URLs are fetched
+     from Flickr and Imgur*/
     displayPhoto = [allPhotos objectAtIndex:indexPath.item];
+    [self.cell.imageView sd_setImageWithURL:displayPhoto.imageURL placeholderImage:[UIImage imageNamed:@"image2"]];
     
     /*extract imageURL from Photo Model and use asych. image downloading library to get UIImage*/
     
+    //self.cell.imageView.image = displayPhoto.image;
     
-    self.cell.imageView.image = displayPhoto.image;
-    
-    
-
     return self.cell;
 }
 
@@ -66,17 +70,17 @@
     return [allPhotos count];
 }
 
+#pragma mark FlickrClient Delegate Method
 -(void)reloadUIAfterImageDownload
 {
     NSLog(@"Delegate Reload Called.....\n");
-    //[self.collectionView reloadData];
+    [self.collectionView reloadData];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     /*DetailViewController is destination*/
     DetailViewController *detailView = [[DetailViewController alloc]init];
-    PhotoCell *cell = [[PhotoCell alloc]init];
     
     if([segue.identifier isEqualToString:@"showFullPhoto"]) {
         detailView = segue.destinationViewController;
@@ -85,12 +89,10 @@
         NSIndexPath *index = [[NSIndexPath alloc]init];
         index = [self.collectionView indexPathForCell:sender];
         
-        cell = (PhotoCell *)[self.collectionView cellForItemAtIndexPath:index];
-        
-        detailView.theImage = cell.imageView.image;
-        
-        //detailView.theImageTitle =
-        
+        displayPhoto = [allPhotos objectAtIndex:index.item];
+        detailView.theImage = displayPhoto.image;
+        detailView.theImageTitle = displayPhoto.title;
+    
     }
     
 }

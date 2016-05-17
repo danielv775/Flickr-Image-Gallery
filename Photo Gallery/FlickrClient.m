@@ -6,6 +6,11 @@
 //  Copyright © 2016 Dan Vasilyonok. All rights reserved.
 //
 
+/*
+ Although called FlickrClient, this API interfaces with both the Flickr API
+ and Imgur API using GET requests to fetch images and populate the Photo Model
+ */
+
 #import "FlickrClient.h"
 #import "LibraryAPI.h"
 #import "Photo.h"
@@ -22,6 +27,18 @@
     UIImage *realImage;
 }
 
+-(void)refreshUIOnMainThread
+{
+    NSLog(@"Entering refreshUIOnMainThread...\n");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"Entering dispatch_get_main_queue...\n");
+        if ([self.delegate respondsToSelector:@selector(reloadUIAfterImageDownload)]) {
+            NSLog(@"Entering Responds to @selector(reloadUIAfterImageDownload)...\n");
+            [self.delegate reloadUIAfterImageDownload];
+        }
+    });
+}
+
 - (id)getRequestFlickr:(NSString*)urlString
 {
     NSURL *url = [NSURL URLWithString:urlString];
@@ -34,12 +51,11 @@
         [self receiveJSONDataFromFlickr:data];
         
         /*Use delegate to tell View Controller to call a reloadUI function after image download on main thread*/
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if([self.delegate respondsToSelector:@selector(reloadUIAfterImageDownload)]) {
-                NSLog(@"Calling delegate after download soon...\n");
-                [self.delegate reloadUIAfterImageDownload];
-            }
-        });
+        
+        /*responds to selector returns YES if the delegate class, ViewController in this case
+        has implemented the reloadUIAfterImageDownload declared in the protocol*/
+        [self refreshUIOnMainThread];
+        
     }];
     [task resume];
     
@@ -59,6 +75,9 @@
         
         /*Parse returned JSON to extract image data and add to photo model*/
         [self receiveJSONDataFromImgur:data];
+        
+        /*Use delegate to tell View Controller to call a reloadUI function after image download on main thread*/
+        [self refreshUIOnMainThread];
         
     }];
     [task resume];
