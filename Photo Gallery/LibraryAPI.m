@@ -58,8 +58,11 @@ NSString *const ImgurAPISecretKey = @"7f21e67831cf9b3d062f81064e5a70bda86663dd";
         /*Web server images from Flickr and Imgur*/
         flickrClient = [[FlickrClient alloc]init];
         
+        /*Data fetched from either Flickr or Imgur, and after the 1st one finishes, the 2nd one
+         fetches the its image data*/
+        
         /*Fetch Photos from Flickr*/
-        //[self fetchPhotosFromFlickrServer:FlickrAPIKey withKeyWord:keyWord];
+        [self fetchPhotosFromFlickrServer:FlickrAPIKey withKeyWord:keyWord];
         
         /*Fetch Photos from Imgur*/
         [self fetchPhotosFromImgurServer:ImgurAPIKey];

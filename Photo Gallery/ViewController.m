@@ -46,28 +46,22 @@
     
     /*Pull photo from Photo model Array*/
     displayPhoto = [allPhotos objectAtIndex:indexPath.item];
+    
+    /*extract imageURL from Photo Model and use asych. image downloading library to get UIImage*/
+    
+    
     self.cell.imageView.image = displayPhoto.image;
     
-    /*Test images from assets*/
-    /*
-    NSString *imageName = [[NSString alloc]init];
-    if(indexPath.row % 3 == 0) {
-        imageName = @"image1";
-    }
-    else if(indexPath.row % 3 == 1) {
-        imageName = @"image2";
-    }
-    else if(indexPath.row % 3 == 2) {
-        imageName = @"image3";
-    }
-    self.cell.imageView.image = [UIImage imageNamed:imageName];
-     */
     
+
     return self.cell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    /*Initially, 3 photos from assets.xcassets*/
+    /*After Photo Model populated with data from Flickr and Imgur, should increase*/
+    
     NSLog(@"Number of Photos in Photo Model: %lu", (unsigned long)[allPhotos count]);
     return [allPhotos count];
 }

@@ -32,6 +32,7 @@
         
         /*Parse JSON result*/
         [self receiveJSONDataFromFlickr:data];
+        
         /*Use delegate to tell View Controller to call a reloadUI function after image download on main thread*/
         dispatch_async(dispatch_get_main_queue(), ^{
             if([self.delegate respondsToSelector:@selector(reloadUIAfterImageDownload)]) {
@@ -48,14 +49,10 @@
 
 -(id)getRequestImgur:(NSString*)urlString ImgurAPIKey:(NSString *)APIKey
 {
-    NSLog(@"Constructing Request...\n");
     NSURL *url = [NSURL URLWithString:urlString];
-    
-    //NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
-    //[request setValue:@"Authorization" forKey:APIKey];
     [request setValue:APIKey forHTTPHeaderField:@"Authorization"];
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession]dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -98,10 +95,11 @@
         imageURLString = [photo objectForKey:@"link"];
         imageURL = [NSURL URLWithString:imageURLString];
         
+        NSLog(@"Imgur: title: %@ and URL: %@\n\n", title, imageURLString);
+        
         webserverPhoto = [[Photo alloc]initWithTitle:title AndImageURL:imageURL AndUIImage:nil];
         
         [libraryAPI addPhoto:webserverPhoto];
-        
     }
     
     NSLog(@"Imgur Server Photos added to model\n");
@@ -115,7 +113,7 @@
     NSDictionary *jsonResult = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     
     //check if succesful connection and view returned images
-    [self checkJSONRequest:jsonResult];
+    //[self checkJSONRequest:jsonResult];
     
     //array where each element is a dictionairy where each key is a photoid and value is
     //the different metadata
@@ -135,6 +133,8 @@
         
         /*GET imageURL for photo model*/
         imageURL = [NSURL URLWithString:photoURLString];
+        
+        NSLog(@"Flickr: title: %@ and URL: %@\n\n", title, photoURLString);
         
         //Store title property and imageURL in photo model
         webserverPhoto = [[Photo alloc]initWithTitle:title AndImageURL:imageURL AndUIImage:nil];
