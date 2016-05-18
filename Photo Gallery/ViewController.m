@@ -30,6 +30,8 @@
     LibraryAPI *libraryAPI = [LibraryAPI sharedInstance];
     allPhotos = [libraryAPI getPhotos];
     
+    NSLog(@"ViewDidLoad: Number of Photos in Photo Model: %lu\n", (unsigned long)[allPhotos count]);
+    
     self.collectionView.collectionViewLayout = [[CustomFlowLayout alloc] init];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self changeNavBarAttributes];
@@ -63,17 +65,23 @@
     /*After Photo Model populated with data from Flickr and Imgur, should increase*/
     /*After reloadData called, this should be called again with the new count*/
     
-    NSLog(@"Number of Photos in Photo Model: %lu", (unsigned long)[allPhotos count]);
+    NSLog(@"numberofItemsInSection: Number of Photos in Photo Model: %lu\n", (unsigned long)[allPhotos count]);
     return ([allPhotos count]);
 }
 
 #pragma mark FlickrClient Delegate Method
 -(void)reloadUIAfterImageDownload:(NSArray*)photosFromWeb
 {
-    NSLog(@"Delegate Reload Called.....\n");
     allPhotos = photosFromWeb;
-    NSLog(@"Number of Photos in Photo Model AllPhotos: %lu", (unsigned long)[allPhotos count]);
-    [self.collectionView reloadData];
+    NSLog(@"reloadUIAfterDelegate: Number of Photos in Photo Model: %lu\n", (unsigned long)[allPhotos count]);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"about to reload collectionview...\n");
+        //collectionview is nil, so reloadData is not called???????
+        [self.collectionView reloadData];
+        
+    });
+    
 }
  
 

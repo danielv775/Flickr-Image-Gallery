@@ -15,8 +15,10 @@
 
 @interface ViewController : UIViewController<UICollectionViewDataSource, FlickrClientDelegate>
 
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
+
 @property(strong, nonatomic) PhotoCell *cell;
+
 
 @end
 

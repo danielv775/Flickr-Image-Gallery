@@ -69,7 +69,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gallery" id="MAL-WX-Lr3"/>
                     <connections>
-                        <outlet property="collectionView" destination="cxW-GJ-33R" id="aUt-Zr-Wl7"/>
+                        <outlet property="collectionView" destination="cxW-GJ-33R" id="kCP-NR-tPC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bh7-cS-CoJ" sceneMemberID="firstResponder"/>
