@@ -25,7 +25,7 @@
 @interface FlickrClient : NSObject
 
 //Used to communicate with VC, which should reload UI after images fetched from server
-@property (strong, nonatomic) id <FlickrClientDelegate> delegate;
+@property (weak, nonatomic) id <FlickrClientDelegate> delegate;
 
 //Wrapping function for delegate method function call
 //Calls delegate method that is defined in View Controller to "reloadData"

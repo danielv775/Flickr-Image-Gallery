@@ -17,11 +17,21 @@
 {
     self = [super init];
     if(self) {
-        /*populate photos array with sample photos*/
+        
+        /*@image1 is not a path, must save to local directory first
+        
+        NSURL *localImage1 = [[NSURL alloc]initFileURLWithPath:@"image1"];
+        NSURL *localImage2 = [[NSURL alloc]initFileURLWithPath:@"image2"];
+        NSURL *localImage3 = [[NSURL alloc]initFileURLWithPath:@"image3"];
+        
+        Saving UIImage to a local directory, I can get rid of UIImage parameter in init function, and use
+        [NSURL alloc]initFileURLWithPath:@"filePath"] when passing as imageURL
+         */
         photos = [NSMutableArray arrayWithArray:
                   @[[[Photo alloc] initWithTitle:@"Oliver1" AndImageURL:nil AndUIImage:[UIImage imageNamed:@"image1"]],
                     [[Photo alloc] initWithTitle:@"Oliver2" AndImageURL:nil AndUIImage:[UIImage imageNamed:@"image2"]],
                     [[Photo alloc] initWithTitle:@"FancyRoom" AndImageURL:nil AndUIImage:[UIImage imageNamed:@"image3"]]]];
+         
     }
     return self;
 }

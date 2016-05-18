@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <ImageIO/ImageIO.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface DetailViewController ()
 
@@ -19,12 +20,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Use display photo object to extract image info
+    
     [self initUI];
-    self.imageView.image = self.theImage;
     
+    [self.imageView sd_setImageWithURL:self.displayPhoto.imageURL placeholderImage:self.displayPhoto.image];
     //NSLog(@"image Title text: %@\n", self.theImageTitle);
-    
-    self.imageTitleLabel.text = self.theImageTitle;
+    self.imageTitleLabel.text = self.displayPhoto.title;
     
     // Do any additional setup after loading the view.
 }
@@ -49,7 +51,7 @@
 
 -(void)viewImageMetaData
 {
-    NSData *imageData = UIImageJPEGRepresentation(self.theImage,1.0);
+    NSData *imageData = UIImageJPEGRepresentation(self.displayPhoto.image,1.0);
     CGImageSourceRef source = CGImageSourceCreateWithData((CFDataRef)imageData, nil);
     NSDictionary *metaData = (NSDictionary *)CFBridgingRelease(CGImageSourceCopyPropertiesAtIndex(source, 0, nil));
     

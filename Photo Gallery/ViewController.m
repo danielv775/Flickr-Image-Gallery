@@ -22,12 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    /*Directly connect View Controller to FlickrClient*/
-    //FlickrClient *flickrDelegate = [[FlickrClient alloc]init];
-    //flickrDelegate.delegate = self;
-    
     /*Retrieve Photo Model array*/
     LibraryAPI *libraryAPI = [LibraryAPI sharedInstance];
+    libraryAPI.flickrClient.delegate = self;
     allPhotos = [libraryAPI getPhotos];
     
     NSLog(@"ViewDidLoad: Number of Photos in Photo Model: %lu\n", (unsigned long)[allPhotos count]);
@@ -54,8 +51,9 @@
     /*Pull photo from Photo model Array, imageURL property should be populated after URLs are fetched
      from Flickr and Imgur*/
     displayPhoto = [allPhotos objectAtIndex:indexPath.item];
-    [self.cell.imageView sd_setImageWithURL:displayPhoto.imageURL placeholderImage:displayPhoto.image];
     
+    [self.cell.imageView sd_setImageWithURL:displayPhoto.imageURL placeholderImage:displayPhoto.image];
+        
     return self.cell;
 }
 
@@ -75,12 +73,10 @@
     LibraryAPI *libraryAPI = [LibraryAPI sharedInstance];
     allPhotos = [libraryAPI getPhotos];
     NSLog(@"reloadUIAfterDelegate: Number of Photos in Photo Model: %lu\n", (unsigned long)[allPhotos count]);
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"about to reload collectionview...\n");
-        //collectionview is nil, so reloadData is not called???????
-        
         [self.collectionView reloadData];
-        
     });
     
 }
@@ -99,9 +95,7 @@
         index = [self.collectionView indexPathForCell:sender];
         
         displayPhoto = [allPhotos objectAtIndex:index.item];
-        detailView.theImage = displayPhoto.image;
-        detailView.theImageTitle = displayPhoto.title;
-    
+        detailView.displayPhoto = displayPhoto;
     }
     
 }

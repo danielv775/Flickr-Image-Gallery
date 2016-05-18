@@ -12,11 +12,12 @@
 @interface Photo : NSObject
 
 @property(nonatomic, copy) NSString *title;
-
 @property(nonatomic, copy) NSURL *imageURL;
-
 @property(nonatomic, copy) UIImage *image;
 
 -(id)initWithTitle:(NSString *)title AndImageURL:(NSURL *)imageURL AndUIImage:(UIImage *)image;
+
+-(id)initImgurWithDictionary:(NSDictionary *)photo;
+-(id)initFlickrWithDictionary:(NSDictionary *)photo;
 
 @end

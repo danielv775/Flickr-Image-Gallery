@@ -27,8 +27,6 @@ NSString *const ImgurAPISecretKey = @"7f21e67831cf9b3d062f81064e5a70bda86663dd";
 @implementation LibraryAPI
 {
     PersistImages *persistImages;
-    FlickrClient *flickrClient;
-    ViewController *vc;
     NSString *requestStringFlickr;
     
     NSString *requestStringImgur;
@@ -45,9 +43,7 @@ NSString *const ImgurAPISecretKey = @"7f21e67831cf9b3d062f81064e5a70bda86663dd";
     dispatch_once(&oncePredicate, ^{
         sharedInstance = [[LibraryAPI alloc]init];
     });
-    
     return sharedInstance;
-    
 }
 
 -(id)init
@@ -58,10 +54,8 @@ NSString *const ImgurAPISecretKey = @"7f21e67831cf9b3d062f81064e5a70bda86663dd";
         persistImages = [[PersistImages alloc]init];
         
         /*Web server images from Flickr and Imgur*/
-        flickrClient = [[FlickrClient alloc]init];
-        vc = [[ViewController alloc]init];
-        flickrClient.delegate = vc;
-        
+        self.flickrClient = [[FlickrClient alloc]init];
+       
         /*Data fetched from either Flickr or Imgur, and after the 1st one finishes, the 2nd one
          fetches the its image data*/
         
@@ -80,7 +74,7 @@ NSString *const ImgurAPISecretKey = @"7f21e67831cf9b3d062f81064e5a70bda86663dd";
     requestStringFlickr = [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&per_page=25&format=json&nojsoncallback=1",APIKey,keyWord];
     
     /*Fetch images and populate Photo Model*/
-    [flickrClient getRequestFlickr:requestStringFlickr];
+    [self.flickrClient getRequestFlickr:requestStringFlickr];
 }
 
 -(void)fetchPhotosFromImgurServer:(NSString*)APIKey
@@ -89,7 +83,7 @@ NSString *const ImgurAPISecretKey = @"7f21e67831cf9b3d062f81064e5a70bda86663dd";
     requestStringImgur = @"https://api.imgur.com/3/gallery/r/earthporn/time/";
     
     /*Fetch Images and populate Photo Model*/
-    [flickrClient getRequestImgur:requestStringImgur ImgurAPIKey:APIKey];
+    [self.flickrClient getRequestImgur:requestStringImgur ImgurAPIKey:APIKey];
 }
 
 

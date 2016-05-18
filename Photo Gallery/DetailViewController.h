@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Photo.h"
 
 @interface DetailViewController : UIViewController
 
@@ -17,9 +18,6 @@
 /*Back Button*/
 - (IBAction)cancelBtn:(id)sender;
 
-
-/*pass image and title into these*/
-@property(strong, nonatomic) UIImage *theImage;
-@property(atomic) NSString *theImageTitle;
+@property(strong, nonatomic) Photo *displayPhoto;
 
 @end

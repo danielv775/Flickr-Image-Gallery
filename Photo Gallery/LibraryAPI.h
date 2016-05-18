@@ -16,6 +16,8 @@
 
 +(LibraryAPI *)sharedInstance;
 
+@property(strong,nonatomic) FlickrClient *flickrClient;
+
 -(NSArray*)getPhotos;
 -(void)addPhoto:(Photo *)photo;
 -(void)deletePhotoAtIndex:(int)index;
