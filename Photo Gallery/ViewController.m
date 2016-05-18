@@ -70,14 +70,15 @@
 }
 
 #pragma mark FlickrClient Delegate Method
--(void)reloadUIAfterImageDownload:(NSArray*)photosFromWeb
+-(void)reloadUIAfterImageDownload
 {
-    allPhotos = photosFromWeb;
+    LibraryAPI *libraryAPI = [LibraryAPI sharedInstance];
+    allPhotos = [libraryAPI getPhotos];
     NSLog(@"reloadUIAfterDelegate: Number of Photos in Photo Model: %lu\n", (unsigned long)[allPhotos count]);
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"about to reload collectionview...\n");
         //collectionview is nil, so reloadData is not called???????
+        
         [self.collectionView reloadData];
         
     });

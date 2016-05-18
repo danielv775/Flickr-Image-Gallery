@@ -18,7 +18,7 @@
 
 @protocol FlickrClientDelegate <NSObject>
 
--(void)reloadUIAfterImageDownload:(NSArray*)photosFromWeb;
+-(void)reloadUIAfterImageDownload;
 
 @end
 

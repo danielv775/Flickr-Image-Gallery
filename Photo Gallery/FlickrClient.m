@@ -24,24 +24,13 @@
     NSString *title;
     NSURL *imageURL;
     NSString *imageURLString;
-    UIImage *realImage;
-    NSArray *photosFromWeb;
-    
-    UICollectionView *collectionView;
+    UIImage *realImage;    
 }
 
 -(void)refreshUIOnMainThread
 {
-    photosFromWeb = [libraryAPI getPhotos];
-    /*
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if([self.delegate respondsToSelector:@selector(reloadUIAfterImageDownload:)]) {
-            [self.delegate reloadUIAfterImageDownload:photosFromWeb];
-        }
-    });
-     */
-    if([self.delegate respondsToSelector:@selector(reloadUIAfterImageDownload:)]) {
-        [self.delegate reloadUIAfterImageDownload:photosFromWeb];
+    if([self.delegate respondsToSelector:@selector(reloadUIAfterImageDownload)]) {
+        [self.delegate reloadUIAfterImageDownload];
     }
 }
 

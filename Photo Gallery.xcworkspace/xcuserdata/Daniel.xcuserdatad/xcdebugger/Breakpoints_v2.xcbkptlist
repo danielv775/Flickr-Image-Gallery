@@ -2,4 +2,69 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Photo Gallery/ViewController.m"
+            timestampString = "485276606.841506"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-reloadUIAfterImageDownload"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__44-[ViewController reloadUIAfterImageDownload]_block_invoke"
+                  moduleName = "Photo Gallery"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Daniel/Desktop/JobApps/payPal/Updated/Photo%20Gallery/Photo%20Gallery/ViewController.m"
+                  timestampString = "485276614.247304"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_"
+                  moduleName = "Photo Gallery"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Daniel/Desktop/JobApps/payPal/Updated/Photo%20Gallery/Photo%20Gallery/ViewController.m"
+                  timestampString = "485276614.247459"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_"
+                  moduleName = "Photo Gallery"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Daniel/Desktop/JobApps/payPal/Updated/Photo%20Gallery/Photo%20Gallery/ViewController.m"
+                  timestampString = "485276614.247564"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
